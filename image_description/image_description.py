@@ -22,6 +22,26 @@ def describe_image(image_path: Path, model: str, temperature: float = 0.2):
                 "images": [str(image_path)]
             }
         ],
+        format={
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Description and Entities Schema",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A short text describing the context or content."
+                },
+                "entities": {
+                    "type": "array",
+                    "description": "A list of entity identifiers or names referenced in the description.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": ["description", "entities"],
+            "additionalProperties": False
+        },
         options={'temperature': temperature},
     )
 
