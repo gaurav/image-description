@@ -12,7 +12,7 @@ def describe_image(image_path: Path, model: str):
             image_metadata = f.read()
 
     # Query model
-    logging.info(f"Querying model {model} for image {image_path} with metadata: {image_metadata}")
+    logging.debug(f"Querying model {model} for image {image_path} with metadata: {image_metadata}")
     res = ollama.chat(
         model=model,
         messages=[
