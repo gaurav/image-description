@@ -45,6 +45,8 @@ def main(image_paths, model):
                     logging.info(f"Found image: {filepath}")
                     description = image_description.describe_image(Path(filepath), model)
                     logging.info(f" - Image description: {description}")
+                    with open(f"{filepath}_description.txt", "w") as f:
+                        f.write(description)
 
 if __name__ == "__main__":
     main()
