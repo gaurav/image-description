@@ -17,7 +17,8 @@ IMAGE_EXTENSIONS_LC = (
 @click.command()
 @click.argument("IMAGE_PATHS", default=["./images"], nargs=-1, type=click.Path(exists=True, file_okay=True, dir_okay=True))
 @click.option("--model", default="llava", help="Model to use for image description")
-def main(image_paths, model):
+@click.option("--temperature", default="0.2", help="Temperature for the LLM model")
+def main(image_paths, model, temperature):
     """
     Processes the given directory or file path to find images, logs their discovery, and generates descriptions
     based on the provided model.
@@ -43,7 +44,7 @@ def main(image_paths, model):
                 logging.debug(f"Checking image: {filepath}")
                 if filepath.endswith(IMAGE_EXTENSIONS_LC):
                     logging.info(f"Found image: {filepath}")
-                    description = image_description.describe_image(Path(filepath), model)
+                    description = image_description.describe_image(Path(filepath), model, temperature)
                     logging.info(f" - Image description: {description}")
                     with open(f"{filepath}_description.txt", "w") as f:
                         f.write(description)
