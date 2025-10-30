@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 from pathlib import Path
@@ -45,9 +46,9 @@ def main(image_paths, model, temperature):
                 if filepath.endswith(IMAGE_EXTENSIONS_LC):
                     logging.info(f"Found image: {filepath}")
                     description = image_description.describe_image(Path(filepath), model, temperature)
-                    logging.info(f" - Image description: {description}")
-                    with open(f"{filepath}_description.txt", "w") as f:
-                        f.write(description)
+                    logging.info(f" - Image description: {json.dumps(description, indent=2)}")
+                    with open(Path(filepath).with_suffix('.json'), "w") as f:
+                        json.dump(description, f)
 
 if __name__ == "__main__":
     main()
