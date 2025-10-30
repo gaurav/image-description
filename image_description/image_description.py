@@ -2,7 +2,7 @@ from pathlib import Path
 import logging
 import ollama
 
-def describe_image(image_path: Path, model: str):
+def describe_image(image_path: Path, model: str, temperature: float = 0.2):
     # Load image metadata.
     image_metadata = ""
     image_metadata_filename = image_path.with_suffix('.txt')
@@ -21,7 +21,8 @@ def describe_image(image_path: Path, model: str):
                 "content": f"Given the following metadata, describe this image: {image_metadata}",
                 "images": [str(image_path)]
             }
-        ]
+        ],
+        options={'temperature': temperature},
     )
 
     return res['message']['content']
