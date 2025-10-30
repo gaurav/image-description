@@ -16,7 +16,7 @@ IMAGE_EXTENSIONS_LC = (
 
 @click.command()
 @click.argument("IMAGE_PATHS", default=["./images"], nargs=-1, type=click.Path(exists=True, file_okay=True, dir_okay=True))
-@click.option("--model", default="llava", help="Model to use for image description")
+@click.option("--model", default="gemma3", help="Model to use for image description")
 @click.option("--temperature", default="0.2", help="Temperature for the LLM model")
 def main(image_paths, model, temperature):
     """
